@@ -8,16 +8,19 @@ echo "--------> Install qpdf"
 BUILD_DIR=$1
 VENDOR_DIR="vendor/qpdf"
 DOWNLOAD_BASE_PATH="http://us-west-2.clouds.archive.ubuntu.com/ubuntu/pool/main/q/qpdf"
-LIB_DPKG=libqpdf26_9.1.1-1_amd64.deb
+LIB_DPKG=libqpdf21_8.4.0-2_amd64.deb
+BIN_DPKG=qpdf_8.4.0-2_amd64.deb
 
 echo "Downloading binaries" | indent
 cd $BUILD_DIR
 mkdir -p $VENDOR_DIR
 cd $VENDOR_DIR
 wget --quiet $DOWNLOAD_BASE_PATH/$LIB_DPKG
+wget --quiet $DOWNLOAD_BASE_PATH/$BIN_DPKG
 
 echo "Downloading binaries" | indent
 dpkg -x ./$LIB_DPKG .
+dpkg -x ./$BIN_DPKG .
 mv usr/* .
 rm -r usr *.deb
 
